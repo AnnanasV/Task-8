@@ -1,4 +1,5 @@
-﻿var thread1 = new Thread(() =>
+﻿/*
+var thread1 = new Thread(() =>
 {
     for(int i = 0; i < 10; i++)
     {
@@ -24,3 +25,18 @@ thread2.Start();
 
 thread1.Join();
 thread2.Join();
+*/
+
+for(int i = 0; i < 10; i++)
+{
+    int taskNum = i;
+    ThreadPool.QueueUserWorkItem(Task, taskNum);
+}
+
+Thread.Sleep(1000);
+
+
+static void Task(object number)
+{
+    Console.WriteLine($"Number: {number} Thread: {Thread.CurrentThread.ManagedThreadId}");
+}
